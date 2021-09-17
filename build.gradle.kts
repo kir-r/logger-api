@@ -9,31 +9,32 @@ plugins {
 val scriptUrl: String by extra
 
 apply(from = "$scriptUrl/git-version.gradle.kts")
+apply(from = "$scriptUrl/maven-repo.gradle.kts")
 
 repositories {
     mavenLocal()
-    apply(from = "$scriptUrl/maven-repo.gradle.kts")
-    jcenter()
+    mavenCentral()
 }
 
 kotlin {
-    sourceSets {
-        commonTest {
-            dependencies {
-                implementation(kotlin("test"))
-                implementation(kotlin("test-annotations-common"))
+    targets {
+        mingwX64()
+        macosX64()
+        linuxX64()
+        jvm {
+            val test by compilations
+            test.defaultSourceSet {
+                dependencies {
+                    implementation(kotlin("test-junit"))
+                }
             }
         }
     }
-
-    linuxX64()
-    macosX64()
-    mingwX64()
-    jvm {
-        val test by compilations
-        test.defaultSourceSet {
+    sourceSets {
+        val commonMain by getting {
             dependencies {
-                implementation(kotlin("test-junit"))
+                implementation(kotlin("test"))
+                implementation(kotlin("test-annotations-common"))
             }
         }
     }

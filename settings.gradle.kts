@@ -10,4 +10,9 @@ pluginManagement {
         kotlin("multiplatform") version kotlinVersion
         id("com.github.hierynomus.license") version licenseVersion
     }
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        gradlePluginPortal()
+    }
 }
