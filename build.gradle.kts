@@ -40,6 +40,19 @@ kotlin {
     }
 }
 
+publishing {
+    repositories {
+        maven {
+            name = "OSSRH"
+            uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
+            credentials {
+                username = System.getenv("MAVEN_USERNAME")
+                password = System.getenv("MAVEN_PASSWORD")
+            }
+        }
+    }
+}
+
 val licenseFormatSettings by tasks.registering(com.hierynomus.gradle.license.tasks.LicenseFormat::class) {
     source = fileTree(project.projectDir).also {
         include("**/*.kt", "**/*.java", "**/*.groovy")
