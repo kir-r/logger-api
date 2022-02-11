@@ -27,12 +27,3 @@ jobs:
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
-
-      - name: echo OSSRH_USERNAME
-        run: echo ${{ secrets.OSSRH_USERNAME }}
-        env:
-          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-      - name: echo MAVEN_USERNAME
-        run: echo $MAVEN_USERNAME
-        env:
-          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
