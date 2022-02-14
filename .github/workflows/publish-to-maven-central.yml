@@ -17,8 +17,6 @@ jobs:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
         run: |
           ls -l
-          chmod +x .github/script.sh
-          .github/script.sh
       - name: gpg version
         run: gpg --version
       - name: gpg list-keys
@@ -34,7 +32,7 @@ jobs:
       - name: Publish package
         uses: gradle/gradle-build-action@4137be6a8bf7d7133955359dbd952c0ca73b1021
         with:
-          arguments: publish
+          arguments: publishAllPublicationsToOSSRHRepository 
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
