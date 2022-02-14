@@ -8,10 +8,6 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - name: gpg version
-        run: gpg --version
-      - name: gpg list-keys
-        run: gpg --list-keys
       - uses: actions/checkout@v2
       - name: Set up Java
         uses: actions/setup-java@v2
