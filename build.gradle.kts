@@ -4,6 +4,8 @@ plugins {
     kotlin("multiplatform")
     id("com.github.hierynomus.license")
     `maven-publish`
+    signing
+    id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
 }
 
 val scriptUrl: String by extra
@@ -40,17 +42,18 @@ kotlin {
     }
 }
 
-publishing {
+nexusPublishing {
     repositories {
-        maven {
-            name = "OSSRH"
-            url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
-            credentials {
-                username = System.getenv("MAVEN_USERNAME")
-                password = System.getenv("MAVEN_PASSWORD")
-            }
+        sonatype {
+            username.set(System.getenv("MAVEN_USERNAME"))
+            password.set(System.getenv("MAVEN_PASSWORD"))
         }
     }
+}
+
+signing {
+    sign(publishing.publications["mavenJava"])
+    useInMemoryPgpKeys(System.getenv("GPG_SIGNING_KEY"), System.getenv("GPG_PASSPHRASE"))
 }
 
 val licenseFormatSettings by tasks.registering(com.hierynomus.gradle.license.tasks.LicenseFormat::class) {
