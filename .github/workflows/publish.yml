@@ -16,6 +16,11 @@ jobs:
     runs-on: ${{ matrix.config.os }}
     steps:
       - uses: actions/checkout@v2
+      - name: Import GPG Key
+        uses: crazy-max/ghaction-import-gpg@v1
+        env:
+           GPG_PRIVATE_KEY: ${{ secrets.GPG_SIGNING_KEY }}
+           PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
       - name: Set up Java
         uses: actions/setup-java@v2
         with:
