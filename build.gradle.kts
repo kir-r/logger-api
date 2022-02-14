@@ -42,6 +42,42 @@ kotlin {
     }
 }
 
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            pom {
+                name.set("logger-api")
+                description.set("GitHub Actions Maven Central Test")
+                url.set("hhttps://github.com/Drill4J/logger-api")
+
+                scm {
+                    connection.set("scm:git:https://github.com/Drill4J/logger-api.git")
+                    developerConnection.set("scm:git:git@github.com:Drill4J/logger-api.git")
+                    url.set("https://github.com/Drill4J/logger-api")
+                }
+
+                licenses {
+                    license {
+                        name.set("Apache 2.0")
+                        url.set("https://opensource.org/licenses/Apache-2.0")
+                    }
+                }
+
+                developers {
+                    developer {
+                        id.set("Drill4J")
+                        name.set("Drill4J")
+                        email.set("drill4j@gmail.com")
+                        url.set("https://drill4j.github.io/")
+                    }
+                }
+            }
+
+            from(components["java"])
+        }
+    }
+}
+
 nexusPublishing {
     repositories {
         sonatype {
