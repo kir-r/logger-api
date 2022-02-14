@@ -8,15 +8,6 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - name: echo OSSRH_USERNAME
-        run: echo ${{ secrets.OSSRH_USERNAME }}
-        env:
-          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-      - name: echo MAVEN_USERNAME
-        env:
-          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-        run: |
-          ls -l
       - name: gpg version
         run: gpg --version
       - name: gpg list-keys
