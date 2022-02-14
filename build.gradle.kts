@@ -42,6 +42,14 @@ kotlin {
     }
 }
 
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(11))
+    }
+    withJavadocJar()
+    withSourcesJar()
+}
+
 publishing {
     publications {
         create<MavenPublication>("mavenJava") {
