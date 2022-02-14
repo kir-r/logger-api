@@ -16,8 +16,8 @@ jobs:
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
         run: |
-          chmod +x "${GITHUB_WORKSPACE}/.github/script.sh"
-          "${GITHUB_WORKSPACE}/.github/script.sh"
+          chmod +x .github/script.sh
+          .github/script.sh
       - name: gpg version
         run: gpg --version
       - name: gpg list-keys
