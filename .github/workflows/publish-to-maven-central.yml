@@ -12,16 +12,12 @@ jobs:
         run: echo ${{ secrets.OSSRH_USERNAME }}
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-      - run: 'echo "$MAVEN_USERNAME" > MAVEN_USERNAME'
-        shell: bash
+      - name: echo MAVEN_USERNAME
         env:
-          MAVEN_USERNAME: ${{secrets.OSSRH_USERNAME}}
-      - run: 'echo "$MAVEN_USERNAME" > username'
-        shell: bash
-        env:
-          MAVEN_USERNAME: ${{secrets.OSSRH_USERNAME}}
-      - run: 'cat username'
-        shell: bash
+          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+      - run: |
+          chmod +x "${GITHUB_WORKSPACE}/.github/script.sh"
+          "${GITHUB_WORKSPACE}/.github/script.sh"
       - name: gpg version
         run: gpg --version
       - name: gpg list-keys
