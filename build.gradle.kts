@@ -42,6 +42,10 @@ kotlin {
     }
 }
 
+java.sourceSets["main"].java {
+    srcDir("src/commonMain/kotlin")
+}
+
 java {
     toolchain {
         languageVersion.set(JavaLanguageVersion.of(11))
