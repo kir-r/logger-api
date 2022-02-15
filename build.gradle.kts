@@ -42,9 +42,7 @@ kotlin {
     }
 }
 
-java.sourceSets["main"].java {
-    srcDir("src/commonMain/kotlin")
-}
+java.sourceSets.create("src/commonMain/kotlin")
 
 java {
     toolchain {
