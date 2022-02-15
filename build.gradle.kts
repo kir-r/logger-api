@@ -33,6 +33,13 @@ kotlin {
         }
     }
     sourceSets {
+        
+        commonMain {
+            dependencies {
+                implementation(kotlin("stdlib-common"))
+            }
+        }
+        
         val commonMain by getting {
             dependencies {
                 implementation(kotlin("test"))
@@ -41,8 +48,6 @@ kotlin {
         }
     }
 }
-
-java.sourceSets.create("src/commonMain/kotlin")
 
 java {
     toolchain {
