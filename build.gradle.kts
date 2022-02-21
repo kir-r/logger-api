@@ -31,7 +31,7 @@ kotlin {
         }
     }
     sourceSets {
-        val commonMain by getting {
+        @Suppress("UNUSED_VARIABLE") val commonMain by getting {
             dependencies {
                 implementation(kotlin("test"))
                 implementation(kotlin("test-annotations-common"))
