@@ -15,6 +15,9 @@
  */
 package com.epam.drill.logger.api
 
+import kotlin.time.ExperimentalTime
+import kotlin.time.measureTimedValue
+
 interface LoggerFactory {
     fun logger(name: String): Logger
 }
@@ -32,3 +35,21 @@ interface Logger {
     fun warn(t: Throwable? = null, marker: Marker? = null, msg: () -> Any?)
     fun error(t: Throwable? = null, marker: Marker? = null, msg: () -> Any?)
 }
+
+@OptIn(ExperimentalTime::class)
+inline fun <T> Logger.trackTime(
+    tag: String = "",
+    debug: Boolean = false,
+    block: () -> T
+) = measureTimedValue { block() }.apply {
+    val message = "[$tag] took: $duration"
+    when {
+        duration.inSeconds > 1 -> {
+            warn { message }
+        }
+        duration.inSeconds > 30 -> {
+            error { message }
+        }
+        else -> if (debug) debug { message } else trace { message }
+    }
+}.value
